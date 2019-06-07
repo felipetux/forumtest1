@@ -1,0 +1,44 @@
+<configuration>  
+  <appender name="RESTSERVICE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>./logs/restService.log</file>
+    <encoder>
+      <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+    		<fileNamePattern>./logs/restService.%d{yyyy-MM-dd}.log</fileNamePattern>
+    		<maxHistory>3</maxHistory>
+    </rollingPolicy>
+  </appender>
+  
+    <appender name="ERRORSERVICE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <param name="maxBackupIndex" value="10"/>
+    <file>./logs/error.log</file>
+    <encoder>
+      <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>./logs/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>3</maxHistory>
+    </rollingPolicy>
+  </appender>
+
+<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n</Pattern>
+</encoder>
+</appender>
+
+  <logger name="restservice" level="INFO">
+    <appender-ref ref="RESTSERVICE" />
+</logger>
+<logger name="errorservice" level="ERROR">
+<appender-ref ref="ERRORSERVICE" />
+</logger>
+
+<root level="INFO">
+    <appender-ref ref="STDOUT" />
+     <appender-ref ref="RESTSERVICE"/>
+</root>
+
+</configuration>  

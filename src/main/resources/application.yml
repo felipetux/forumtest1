@@ -1,0 +1,51 @@
+myapp:
+  properties:    
+    statusurl: http://10.20.3.173:8400/api/ef/catalog_value/v1/EST/GFE
+    securityurl: http://testservicios.forum.local:9275/seguromultianual/v0/permisosusuarios/validarPermisoUsuarioxObjeto
+    obj: apiefoperations
+    spfind: sptOperacionGFEBuscar
+    spfindproc: sptProcesoOperacionBuscar
+    speaf: sptElementoCarritoBuscar
+    spdocumensoli: sptDocumentoSolicitadoBuscar
+    spdocpago: sptDocumentoPagoBuscar
+    spfindinter: sptIntervinienteBuscar
+    spupdate: sptOperacionGFEActualizar
+    spinsertproc: sptProcesoOperacionGFECrear
+    spupdatedocu: sptDocumentoPagoActualizar
+    spamounts: spCalculaMontosGFE
+    spdocparam: sptParametriaDocumentosBuscar
+    spstorboxact: sptDocumentoStorBoxActualizar
+    spurlmachi: http://10.20.3.173:8600/api/db/procedure/v1/
+    spcotiza: spCabezaCotizaLeerXContrato
+spring:
+  datasource:
+    url: jdbc:sqlserver://desasqldb01.forum.local:1433;databaseName=GFE
+    username: usudesa
+    password: Forum2017
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    database: sql-server
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  jackson:
+    serialization:
+      indent-output: true
+  thymeleaf:
+    servlet:
+      content-type: application/json; charset=utf-8
+  application:
+    name: api-ef-operations
+  jmx:
+    default-domain: jmx-ef-operations
+info:
+  version: "v1"
+#Metricas de Actuator.
+management.endpoints.web.exposure.include: health,info, metrics
+management.endpoint.health.show-details: always  
+#Servidor Eureka 
+#eureka:
+#  client:
+#    registerWithEureka: true
+#    serviceUrl:
+#      defaultZone: http://localhost:1111/eureka/
